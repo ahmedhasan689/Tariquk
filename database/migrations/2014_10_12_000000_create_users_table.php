@@ -19,6 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->integer('phone_number');
+            $table->integer('age')->nullable();
+            $table->string('path');
+
+            // Forigen Key For City 
+            $table->foreignId('city_id')->constrained('cities', 'id')->nullOnDelete();
+
             $table->rememberToken();
             $table->timestamps();
         });
