@@ -33,7 +33,7 @@
   <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css">
   <!-- Custom style for RTL -->
   <link rel="stylesheet" href="{{ asset('assets/css/custom.css')}}">
-  
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -92,7 +92,7 @@
           </form>
         </li>
 
-        
+
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -120,7 +120,7 @@
               @method('PUT')
               <a href="#" class="d-block">
                 Ahmed
-              </a>  
+              </a>
             </form>
           </div>
         </div>
@@ -140,13 +140,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.index') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
                     <p>قائمة المشرفين</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('admin.create') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
                     <p>إضافة مشرف</p>
                   </a>
@@ -164,13 +164,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('subadmin.index') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
                     <p>قائمة المشرفين</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('subadmin.create') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
                     <p>إضافة مشرف فرعي</p>
                   </a>

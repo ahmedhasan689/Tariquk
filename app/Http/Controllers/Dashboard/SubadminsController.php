@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\City;
+use App\Models\Subadmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\Admin;
-use App\Models\City;
-
-class AdminsController extends Controller
+class SubadminsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +17,8 @@ class AdminsController extends Controller
      */
     public function index()
     {
-
-        $admins = Admin::all();
-
-        // Flash MSG
-        $success = session()->get('success');
-
-        return view('dashboard.admins.index', compact('admins'));
+        $subadmins = Subadmin::all();
+        return view('Dashboard.Subadmins.index', compact('subadmins'));
     }
 
     /**
@@ -35,7 +29,7 @@ class AdminsController extends Controller
     public function create()
     {
         $cities = City::all();
-        return view('dashboard.admins.create', compact('cities'));
+        return view('Dashboard.Subadmins.create', compact('cities'));
     }
 
     /**
@@ -71,7 +65,7 @@ class AdminsController extends Controller
         // dd($request);
 
         if ($request->post('password') == $request->post('re-password')) {
-            $admin = Admin::create([
+            $subadmin = Subadmin::create([
                 'name' => $request->post('name'),
                 'phone_number' => $request->post('phone_number'),
                 'email' => $request->post('email'),
@@ -80,7 +74,7 @@ class AdminsController extends Controller
                 'avatar' => $image_path,
             ]);
 
-            return redirect()->route('admin.index')->with('success', 'User ' . ($admin->name) . ' Created');
+            return redirect()->route('subadmin.index')->with('success', 'Subadmin ' . ($subadmin->name) . ' Created');
         } else {
             return redirect()->back()->with('Password And Re-Passowrd Not Match');
         }
@@ -105,9 +99,9 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
-        $admin = Admin::findorFail($id);
+        $subadmin = Subadmin::findOrFail($id);
         $cities = City::all();
-        return view('dashboard.admins.edit', compact('cities', 'admin'));
+        return view('Dashboard.Subadmins.edit', compact('subadmin', 'cities'));
     }
 
     /**
@@ -119,7 +113,7 @@ class AdminsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $admin = Admin::findOrFail($id);
+        $subadmin = Subadmin::findOrFail($id);
 
         $request->validate([
             'name' => 'required|min:2',
@@ -152,15 +146,15 @@ class AdminsController extends Controller
         }
 
         // dd($request);
-        $admin->update([
+        $subadmin->update([
             'name' => $request->post('name'),
             'phone_number' => $request->post('phone_number'),
             'email' => $request->post('email'),
-            'avatar' => $image_path ?? $admin->avatar,
+            'avatar' => $image_path ?? $subadmin->avatar,
             'city_id' => $request->post('city'),
         ]);
 
-        return redirect()->route('admin.index')->with('success', 'Admin ' . $admin->name . ' Updated');
+        return redirect()->route('subadmin.index')->with('success', 'Sub-Admin ' . $subadmin->name . ' Updated');
     }
 
     /**
@@ -171,48 +165,47 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        $admin = Admin::find($id);
-        $admin->delete();
-        return redirect()->route('admin.index')->with('success', 'Admin ' . ($admin->name) .  ' Deleted');
+        $subadmin = Subadmin::find($id);
+        $subadmin->delete();
+        return redirect()->route('subadmin.index')->with('success', 'Sub-Admin ' . ($subadmin->name) .  ' Deleted');
     }
 
     public function trash()
     {
-        $admins = Admin::onlyTrashed()->get();
-        return view('dashboard.admins.trash', compact('admins'));
+        $subadmins = Subadmin::onlyTrashed()->get();
+        return view('dashboard.Subadmins.trash', compact('subadmins'));
     }
 
     public function restore(Request $request, $id = null)
     {
         if ($id) {
-            $admins = Admin::onlyTrashed()->findOrFail($id);
-            $admins->restore();
+            $subadmins = Subadmin::onlyTrashed()->findOrFail($id);
+            $subadmins->restore();
 
             // PTG
-            return redirect()->route('admin.index')->with('success', 'Admin ' . $admins->name . ' Restored');
+            return redirect()->route('subadmin.index')->with('success', 'Sub-Admin ' . $subadmins->name . ' Restored');
         }
 
-        $admins = Admin::onlyTrashed()->restore();
-        return redirect()->route('admin.index')->with('success', 'All Admins Restored');
+        $subadmins = Subadmin::onlyTrashed()->restore();
+        return redirect()->route('subadmin.index')->with('success', 'All Sub-Admins Restored');
     }
 
     public function forceDelete($id = null)
     {
         if ($id) {
-            $admins = Admin::onlyTrashed()->findOrFail($id);
+            $subadmins = Subadmin::onlyTrashed()->findOrFail($id);
 
 
-            $admins->forceDelete();
+            $subadmins->forceDelete();
 
             // Delete Avatar
-            unlink(public_path('uploads/' . $admins->avatar));
+            unlink(public_path('uploads/' . $subadmins->avatar));
 
             // PTG
-            return redirect()->route('admin.index')->with('success', 'Admin ' . $admins->name . ' Deleted');
+            return redirect()->route('subadmin.index')->with('success', 'Sub-Admin ' . $subadmins->name . ' Deleted');
         }
 
-        $admins = Admin::onlyTrashed()->forceDelete();
-        return redirect()->route('admin.index')->with('success', 'All Admins Deleted');
+        $subadmins = Subadmin::onlyTrashed()->forceDelete();
+        return redirect()->route('subadmin.index')->with('success', 'All Sub-Admins Deleted');
     }
-
 }

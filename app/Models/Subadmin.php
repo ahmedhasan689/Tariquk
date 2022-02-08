@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Admin extends Model
+class Subadmin extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -24,5 +24,4 @@ class Admin extends Model
     public function city() {
         return $this->belongsTo(City::class, 'city_id');
     }
-
 }
