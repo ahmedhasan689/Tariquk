@@ -82,16 +82,30 @@
 
       </ul>
 
+
       <!-- Right navbar links -->
       <ul class="navbar-nav mr-auto-navbav">
+        @if (auth('admin')->check())
         <li class="nav-item d-none d-sm-inline-block">
-          <form id="logout-form" action="#" method="POST" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+          <form id="logout-form" action="{{ route('logout', 'admin') }}" method="POST" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
             @csrf
             @method('POST')
-            <a type="submit" style="color: #AAA">تسجيل الخروج</a>
+            <a type="submit">
+              تسجيل خروج
+            </a>
           </form>
         </li>
-
+        @else
+        <li class="nav-item d-none d-sm-inline-block">
+          <form id="logout-form" action="{{ route('logout', 'subadmin') }}" method="POST" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+            @csrf
+            @method('POST')
+            <a type="submit">
+              تسجيل خروج
+            </a>
+          </form>
+        </li>
+        @endif
 
       </ul>
     </nav>

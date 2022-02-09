@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      *
@@ -28,11 +29,41 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        // dd($request);
+        if ($request->type == 'admin') {
+            $guardName = 'admin';
+        } elseif ($request->type == 'subadmin') {
+            $guardName = 'subadmin';
+        } else {
+            $guardName = 'web';
+        }
 
-        $request->session()->regenerate();
+        if (Auth::guard($guardName)->attempt([
+            'email' => $request->email, 
+            'password' => $request->password,
+            ])) {
+            if ($request->type == 'admin') {
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+                $request->authenticate();
+                $request->session()->regenerate();
+                return redirect()->intended(RouteServiceProvider::ADMIN);
+
+            } elseif ($request->type == 'subadmin') {
+
+                return redirect()->intended(RouteServiceProvider::SUBADMIN);
+
+            } else {
+
+                return redirect()->intended(RouteServiceProvider::HOME);
+
+            }
+        };
+
+        // $request->authenticate();
+
+        // $request->session()->regenerate();
+
+        // return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**
@@ -41,14 +72,21 @@ class AuthenticatedSessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request, $type)
     {
-        Auth::guard('web')->logout();
+        // dd($type);
+       
+        Auth::guard($type)->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function loginForm($type)
+    {
+        return view('auth.login', compact('type'));
     }
 }
