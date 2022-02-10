@@ -18,8 +18,16 @@ class City extends Model
         return $this->hasOne(Admin::class);
     }
 
-    // Relations
     public function subadmin() {
         return $this->hasOne(Subadmin::class);
     }
+
+    public function users() {
+        return $this->hasOne(User::class);
+    }
+    
+    public function report() {
+        return $this->hasMany(Report::class);
+    }
+
 }

@@ -41,11 +41,57 @@
                 </ul>
 
             </div>
-            <form class="d-flex">
-                <button class="log btn btn-outline-success" type="submit">
-                    <a href="{{ route('selection') }}">تسجيل الدخول</a>
-                </button>
+
+            @auth
+            <form class="d-flex" id="logout-form" action="{{ route('logout', 'web') }}" method="POST">
+                @csrf
+                @method('POST')
+
+                <div class="dropdown">
+                    <div class="profile" class=" dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ Auth::user()->profile->image }}" alt="">
+                    </div>
+
+                    <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenu2" style="margin-left: -50px;">
+                        <li class="text-center">
+                            <button class="dropdown-item" type="button">
+                                <a href="{{ route('profile.index') }}">البروفايل</a>
+                            </button>
+                        </li>
+                        <!-- <hr> -->
+                        <li class="text-center">
+                            <button class="dropdown-item" type="button">
+                                <a href="edit.html">تعديل البروفايل</a>
+                            </button>
+                        </li>
+
+                        <li class="text-center">
+                            <button class="dropdown-item" type="button">
+                                <a href="#">مساعدة</a>
+                            </button>
+                        </li>
+
+                        <li class="text-center">
+                            <button class="dropdown-item" type="submit">
+                                تسجيل الخروج
+                            </button>
+                        </li>
+                    </ul>
             </form>
+        </div>
+
+        </form>
+        @endauth
+
+        @guest
+        <form class="d-flex">
+            <button class="log btn btn-outline-success" type="submit">
+                <a href="{{ route('selection') }}">تسجيل الدخول</a>
+            </button>
+        </form>
+        @endguest
+       
+
         </div>
     </nav>
 

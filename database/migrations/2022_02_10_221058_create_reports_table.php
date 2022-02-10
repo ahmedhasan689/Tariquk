@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateReportsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('reports', function (Blueprint $table) {
+            $table->id();
+            $table->string('content');
+            $table->string('street');
+            $table->string('media')->nullable();
+            $table->boolean('show_status')->default(0);
+
+            // Foreign Keys [ User, City ]
+            $table->foreignId('city_id')->constrained('cities')->nullOnDelete();
+            $table->foreignId('user_id')->constrained('users')->nullOnDelete();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('reports');
+    }
+}

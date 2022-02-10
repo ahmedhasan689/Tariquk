@@ -1,59 +1,52 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.Front-layout')
 
+@section('page_title', 'التسجيل')
+
+@section('content')
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <div class="sign">
+            <h2>انشاء حساب جديد</h2>
+            
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+                <x-auth-validation-errors class="mb-4" :errors="$errors" style="text-align: center; background-color: #d60d0d; color: white;font-size: 18px;" />
 
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
+                <div class="group">
+                    <input type="text" placeholder="الاسم الأول" name="first_name">
+                    <input type="text" placeholder="الاسم الأخير" name="last_name">
+                </div>
+                <div class="group">
+                    <select name="city">
+                        @foreach($cities as $city)
+                        <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                        @endforeach         
+                    </select>
+                    <input type="text" placeholder="الشارع" name="street">
+                </div>
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            </div>
+                <div class="group">
+                    <input type="email" placeholder="البريد الالكتروني" name="email">
+                </div>
 
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
+                <div class="group">
+                    <input type="password" placeholder="كلمة المرور " name="password">
+                </div>
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
+                <div class="group">
+                    <input type="password" placeholder="تأكيد كلمة المرور" name="re-password">
+                </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <div class="group">
+                    <input type="text" placeholder="رقم الجوال" name="phone_number">
+                </div>
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
+                <div class="groupSign text-center">
+                    <button type="submit">
+                        تسجيل
+                    </button>
+                </div>
+            </form>
 
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </div>
+@endsection

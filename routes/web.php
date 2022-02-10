@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\AdminsController;
 use App\Http\Controllers\Dashboard\SubadminsController;
+use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\Front\ReportsController;
 use App\Http\Controllers\SelectionController;
 
 /*
@@ -17,9 +20,9 @@ use App\Http\Controllers\SelectionController;
 |
 */
 
-Route::get('/', function () {
-    return view('Front/Home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('name');
+Route::post('/logout', [HomeController::class, 'destroy'])->middleware(['auth:web'])->name('user.logout');
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -31,6 +34,38 @@ require __DIR__ . '/auth.php';
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth:admin,subadmin'])->name('dashboard');
 
 Route::get('/selection', [SelectionController::class, 'index'])->name('selection');
+
+Route::namespace('/Front')
+    ->prefix('home')
+    ->middleware(['auth:web'])
+    ->group(function () {
+
+        // Start Profile Route [ ProfileController ]
+        Route::group([
+            'prefix' => 'profile',
+            'as' => 'profile.'
+        ], function() { 
+            Route::get('/', [ProfileController::class, 'index'])->name('index');
+            Route::get('/create', [ProfileController::class, 'create'])->name('create');
+            Route::post('/', [ProfileController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [ProfileController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [ProfileController::class, 'update'])->name('update');
+            Route::delete('/{id}', [ProfileController::class, 'destroy'])->name('delete');
+        });
+        // End Profile Route [ ProfileController ]
+
+        // Start Report Route [ ReportController ]
+        Route::group([
+            'prefix' => 'report',
+            'as' => 'report.'
+        ], function() { 
+            Route::get('/create', [ReportsController::class, 'create'])->name('create');
+            Route::post('/', [ReportsController::class, 'store'])->name('store');
+        });
+        // End Report Route [ ProfileController ]
+
+
+    });
 
 Route::namespace('/dashboard')
     ->prefix('dashboard')

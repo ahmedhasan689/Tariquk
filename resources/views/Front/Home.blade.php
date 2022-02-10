@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <div class="but">
                 <button>
-                    <a href="add.html"> ابلاغ عن حدث</a> 
+                    <a href="{{ route('report.create') }}"> ابلاغ عن حدث</a> 
                 </button>
             </div>
 
