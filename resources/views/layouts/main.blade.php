@@ -220,23 +220,61 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
-                  الفئات
+                  المدن
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
+
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('city.rafah') }}" class="nav-link">
                     <i class="fa fa-table nav-icon"></i>
-                    <p>قائمة الفئات</p>
+                    <p>رفح</p>
                   </a>
                 </li>
+
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="{{ route('city.khanyounis') }}" class="nav-link">
                     <i class="fa fa-user-plus nav-icon"></i>
-                    <p>إضافة فئة</p>
+                    <p>خانيونس</p>
                   </a>
                 </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('city.middle') }}" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>الوسطى</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('city.gaza') }}" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>غزة</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('city.jabalia') }}" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>جباليا</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('city.beitlahia') }}" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>بين لاهيا</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="{{ route('city.beithanoun') }}" class="nav-link">
+                    <i class="fa fa-user-plus nav-icon"></i>
+                    <p>بيت حانون</p>
+                  </a>
+                </li>
+
               </ul>
             </li>
 

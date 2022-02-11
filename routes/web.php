@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\AdminsController;
+use App\Http\Controllers\Dashboard\CitiesController;
 use App\Http\Controllers\Dashboard\SubadminsController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProfileController;
@@ -35,6 +36,17 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 
 Route::get('/selection', [SelectionController::class, 'index'])->name('selection');
 
+// Start Report Route [ ReportController ]
+Route::group([
+    'prefix' => 'report',
+    'as' => 'report.'
+], function() { 
+    Route::get('/', [ReportsController::class, 'index'])->name('index');
+    Route::get('/create', [ReportsController::class, 'create'])->name('create');
+    Route::post('/', [ReportsController::class, 'store'])->name('store');
+});
+// End Report Route [ ProfileController ]
+
 Route::namespace('/Front')
     ->prefix('home')
     ->middleware(['auth:web'])
@@ -53,19 +65,6 @@ Route::namespace('/Front')
             Route::delete('/{id}', [ProfileController::class, 'destroy'])->name('delete');
         });
         // End Profile Route [ ProfileController ]
-
-        // Start Report Route [ ReportController ]
-        Route::group([
-            'prefix' => 'report',
-            'as' => 'report.'
-        ], function() { 
-            Route::get('/', [ReportsController::class, 'index'])->name('index');
-            Route::get('/create', [ReportsController::class, 'create'])->name('create');
-            Route::post('/', [ReportsController::class, 'store'])->name('store');
-        });
-        // End Report Route [ ProfileController ]
-
-
     });
 
 Route::namespace('/dashboard')
@@ -107,4 +106,25 @@ Route::namespace('/dashboard')
             Route::delete('/{id}', [SubadminsController::class, 'destroy'])->name('delete');
         });
         // End Sub-admins Route [ Subadmins Controller ]
+
+        // Start Cities Route [ Cities Controller ]
+        Route::group([
+            'prefix' => 'cities',
+            'as' => 'city.'
+        ], function() {
+            Route::get('/rafah', [CitiesController::class, 'rafah'])->name('rafah');
+            Route::get('/khanyounis', [CitiesController::class, 'khanYouins'])->name('khanyounis');
+            Route::get('/middle', [CitiesController::class, 'middle'])->name('middle');
+            Route::get('/gaza', [CitiesController::class, 'gaza'])->name('gaza');
+            Route::get('/jabalia', [CitiesController::class, 'jabalia'])->name('jabalia');
+            Route::get('/beitlahia', [CitiesController::class, 'beitLahia'])->name('beitlahia');
+            Route::get('/beithanoun', [CitiesController::class, 'beitHanoun'])->name('beithanoun');
+
+            // To Update Report ( show_status => 1 )
+            Route::put('/{id}', [CitiesController::class, 'showStatus'])->name('update');
+
+            // To Delete Report From DB 
+            Route::delete('/{id}', [CitiesController::class, 'remove'])->name('delete');
+        });
+
     });
