@@ -14,6 +14,7 @@ class Report extends Model
         'show_status',
         'street',
         'media',
+        'media_ext',
         'user_id',
         'city_id'
     ];

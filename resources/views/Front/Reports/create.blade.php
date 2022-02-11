@@ -30,11 +30,11 @@
         <br>
         <div class="gro">
             <p>أضف صورة أو فيديو أو تسجيل صوتي للحدث</p>
-            <input type="file" value="اضافة مرفق" name="media">
+            <input type="file" name="media">
         </div>
         <br>
         <div class="text-center">
-            <button>أضف</button>
+            <button type="submit">أضف</button>
         </div>
 
     </form>

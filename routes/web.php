@@ -59,6 +59,7 @@ Route::namespace('/Front')
             'prefix' => 'report',
             'as' => 'report.'
         ], function() { 
+            Route::get('/', [ReportsController::class, 'index'])->name('index');
             Route::get('/create', [ReportsController::class, 'create'])->name('create');
             Route::post('/', [ReportsController::class, 'store'])->name('store');
         });

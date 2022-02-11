@@ -29,7 +29,7 @@
                         <a class="nav-link " aria-current="page" href="index.html">الصفحة الرئيسية</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="event.html">الحوادث</a>
+                        <a class="nav-link" href="{{ route('report.index') }}">الحوادث</a>
                     </li>
 
                     <li class="nav-item">
