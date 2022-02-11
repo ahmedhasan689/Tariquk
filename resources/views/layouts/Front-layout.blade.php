@@ -17,7 +17,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="cont">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('Front/img/logo.png') }}" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,17 +26,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="index.html">الصفحة الرئيسية</a>
+                        <a class="nav-link " aria-current="page" href="{{ route('home') }}">الصفحة الرئيسية</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('report.index') }}">الحوادث</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="instruct.html">الارشادات</a>
+                        <a class="nav-link" href="{{ route('instruct') }}">الارشادات</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">تواصل معنا</a>
+                        <a class="nav-link" href="{{ route('contact') }}">تواصل معنا</a>
                     </li>
                 </ul>
 

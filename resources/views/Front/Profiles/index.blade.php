@@ -37,42 +37,31 @@
                     <div class="modal-content">
                         <div class="modal-header text-center ">
                             <h5 class="modal-title" style="text-align: center; font-weight: bold; color: #d60d0d;" id="staticBackdropLabel">اضافة المناطق التي تريد تحديد وجهتك اليها </h5>
-
                         </div>
-                        <div class="modal-body">
-                            <div class="group">
-                                <label for="street1">أضف منطقة</label> <br>
-                                <input class="w-100" id="street1" type="text">
-                            </div>
-                            <div class="group">
-                                <label for="street2">أضف منطقة</label> <br>
-                                <input class="w-100" id="street2" type="text">
-                            </div>
-                            <div class="group">
-                                <label for="street3">أضف منطقة</label> <br>
-                                <input class="w-100" id="street3" type="text">
-                            </div>
-                            <div class="group">
-                                <label for="street4">أضف منطقة</label> <br>
-                                <input class="w-100" id="street4" type="text">
-                            </div>
-                            <div class="group">
-                                <label for="street5">أضف منطقة</label> <br>
-                                <input class="w-100" id="street5" type="text">
-                            </div>
-                            <br> <br>
-                            <div class="group d-flex">
-                                <input type="checkbox" style="margin-top: 5px; width: 15px; height: 15px;">
-                                <p style="font-size: large; font-weight: bold; color: #d60d0d; margin-right: 5px;">اوافق على استلام SMS بالابلاغات على الشوارع</p>
-                            </div>
+
+                        <form action="{{ route('path.store') }}" method="POST">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="group">
+                                    <label for="street1">أضف منطقة</label> <br>
+                                    <input class="w-100" id="street1" type="text" name="path">
+                                </div>
+                                
+                                <br> <br>
+                                <div class="group d-flex">
+                                    <input type="checkbox" style="margin-top: 5px; width: 15px; height: 15px;">
+                                    <p style="font-size: large; font-weight: bold; color: #d60d0d; margin-right: 5px;">اوافق على استلام SMS بالابلاغات على الشوارع</p>
+                                </div>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button style="background-color: #d60d0d; color: #fff; font-weight: bold;" type="button" class="btn">موافق</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button style="background-color: #d60d0d; color: #fff; font-weight: bold;" type="submit" class="btn">موافق</button>
+    
+                                <button style="color:#fff ; background-color: #000; font-weight: bold;" type="button" class="btn " data-bs-dismiss="modal">اغلاق</button>
+                            </div>
+                        </form>
 
-                            <button style="color:#fff ; background-color: #000; font-weight: bold;" type="button" class="btn " data-bs-dismiss="modal">اغلاق</button>
-                        </div>
                     </div>
                 </div>
             </div>

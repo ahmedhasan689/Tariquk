@@ -9,6 +9,8 @@ use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\ReportsController;
+use App\Http\Controllers\Front\PathsController;
+use App\Http\Controllers\Front\SearchController;
 use App\Http\Controllers\SelectionController;
 
 /*
@@ -22,12 +24,23 @@ use App\Http\Controllers\SelectionController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('name');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/instruct', [HomeController::class, 'instruct'])->name('instruct');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/logout', [HomeController::class, 'destroy'])->middleware(['auth:web'])->name('user.logout');
+
+// Search Controller
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+
 
 // Notification Controller
 Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications');
 Route::get('notifications/{id}', [NotificationsController::class, 'show'])->name('notifications.read');
+
+// Path Controller
+Route::get('/path', [PathsController::class, 'create'])->name('path.create');
+Route::post('/path', [PathsController::class, 'store'])->name('path.store');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

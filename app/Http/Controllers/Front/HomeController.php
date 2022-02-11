@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\Profile;
+use App\Models\Report;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,20 @@ class HomeController extends Controller
     {
         // $profile = Profile::where('user_id', Auth::user()->id)->first();
         // dd($profile);
-        return view('Front.home');
+        $reports = Report::where('show_status', 1)->limit(3)->get();
+
+        $report = Report::where('show_status', 1)->limit(1)->first();
+
+        return view('Front.home', compact('reports', 'report'));
     }
 
+    public function instruct()
+    {
+        return view('Front.instruct');
+    }
+
+    public function contact()
+    {
+        return view('Front.contact');
+    }
 }

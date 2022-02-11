@@ -12,7 +12,7 @@
         <div class="col-lg-6">
             <div class="but">
                 <button>
-                    <a href="{{ route('report.create') }}"> ابلاغ عن حدث</a> 
+                    <a href="{{ route('report.create') }}"> ابلاغ عن حدث</a>
                 </button>
             </div>
 
@@ -34,44 +34,43 @@
     </div>
     <div class="row">
         <div class="col-lg-6 right">
+            @foreach ($reports as $report)
             <div class="news">
                 <div class="date">
-                    <span>8/2/2022</span>
-                    <span>3:30pm</span>
+                    <span>{{ $report->created_at->diffForHumans() }}</span>
+
                 </div>
                 <p>
-                    جسر وادي غزة مغلق بسبب التصليحات
+                    {{ $report->content }}
                 </p>
             </div>
-            <div class="news">
-                <div class="date">
-                    <span>8/2/2022</span>
-                    <span>4:30pm</span>
-                </div>
-                <p>
-                    اغلاق شارع صلاح الدين / مدخل المغازي بسبب حادث سير </p>
-            </div>
-            <div class="news">
-                <div class="date">
-                    <span>8/2/2022</span>
-                    <span>3:30pm</span>
-                </div>
-                <p>
-                    جسر وادي غزة مغلق بسبب التصليحات
-                </p>
-            </div>
+            @endforeach
+
+
+
         </div>
         <div class="col-lg-6 left">
-            <div class="image">
-                <img src="{{ asset('Front/img/6cd2fccb-9f4b-4d9f-91b5-40e0ef1e1ac4.jfif') }}" alt="">
+            @if($report->media)
+            <div class="left">
+                @if($report->media_ext == 'mp4' || $report->media_ext == 'mkv')
+                <video width="618" height="220" controls>
+                    <source src="{{ asset('uploads') . '/' . $report->media}}" alt="">
+                </video>
+                @elseif($report->media_ext == 'jpg' || $report->media_ext == 'jpeg' || $report->media_ext == 'png')
+                <img src="{{ asset('uploads') . '/' . $report->media}}" alt="">
+                @elseif($report->media_ext == 'mp3' || $report->media_ext == 'm4a')
+                <audio controls style="margin-top: 50px; margin-right: 100px;">
+                    <source src="{{ asset('uploads') . '/' . $report->media}}">
+                </audio>
+                @endif
             </div>
-            <div class="news">
+            @endif
+            <div class="news" style="margin-top: -70px;">
                 <p>
-                    الان شارع النفق مغلق بسبب الأمطار
+                    {{ $report->content }}
                 </p>
                 <div class="date">
-                    <span>8/2/2022</span>
-                    <span>3:30pm</span>
+                    <span>{{ $report->created_at->diffForHumans() }}</span>
                 </div>
 
             </div>
@@ -92,7 +91,7 @@
                     <img src="{{ asset('Front/img/fire.jfif') }}" alt="">
                 </div>
                 <p>
-                    <a href="details.html"> كيف تتصرف في حال واجهت حريق</a>
+                    <a href="#"> كيف تتصرف في حال واجهت حريق</a>
                 </p>
             </div>
         </div>
@@ -110,7 +109,7 @@
                     <img src="{{ asset('Front/img/fire.jfif') }}" alt="">
                 </div>
                 <p>
-                    <a href="details.html"> كيف تتصرف في حال واجهت حريق</a>
+                    <a href="{{ route('instruct') }}"> كيف تتصرف في حال واجهت حريق</a>
                 </p>
             </div>
         </div>
@@ -119,7 +118,7 @@
 </div>
 <div class="contact">
     <h1>تواصل معنا</h1>
-    <p>في حال واجهتك مشكلة في الموقع يمكنك التواصل معنا <a href="contact.html">من هنا</a></p>
+    <p>في حال واجهتك مشكلة في الموقع يمكنك التواصل معنا <a href="{{ route('contact') }}">من هنا</a></p>
 </div>
 @endsection
 

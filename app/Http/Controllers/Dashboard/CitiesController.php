@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ReportCreatedNotification;
 
 use App\Models\Report;
+use App\Models\Path;
 
 class CitiesController extends Controller
 {
@@ -64,9 +67,21 @@ class CitiesController extends Controller
     {
         $report = Report::findOrFail($id);
 
+        $paths = Path::where('path', 'LIKE', '%' . $report->street . '%')->get();
+
+        foreach($paths as $path){
+
+            $users = $path->user;
+        }
+
         $report->update([
             'show_status' => 1,
         ]);
+
+        // dd($users);
+
+        // Send Notifications To Phone Number
+        Notification::send($users, new ReportCreatedNotification($report));
 
         return redirect()->back();
     }

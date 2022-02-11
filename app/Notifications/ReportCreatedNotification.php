@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\NexmoMessage;
 
 use App\Models\Report;
 
@@ -32,7 +33,8 @@ class ReportCreatedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'nexmo'];
+        $via = ['database', 'nexmo'];
+        return $via;
     }
 
     /**
@@ -53,10 +55,18 @@ class ReportCreatedNotification extends Notification
     {
         return [
             'title' => __('إبلاغ جديد'),
-            'body' => __('تمت أضافة تعليق جديد بواسطة', ['user' => $this->report->user->first_name]),
+            'body' => __('تمت أضافة إبلاغ جديد بواسطة', ['user' => $this->report->user->first_name]),
             'icon' => asset('Front/img/report-icon.jpg'),
             'url' => route('city.rafah'),
         ];
+    }
+
+    public function toNexmo($notifiable)
+    {
+        $message = new NexmoMessage();
+        $message->content( ' إبلاغ جديد: هناك إغلاق في', ['street' => $this->report->street] );
+        
+        return $message;
     }
 
     /**
