@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\AdminsController;
 use App\Http\Controllers\Dashboard\CitiesController;
 use App\Http\Controllers\Dashboard\SubadminsController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\NotificationsController;
 use App\Http\Controllers\Front\ProfileController;
 use App\Http\Controllers\Front\ReportsController;
 use App\Http\Controllers\SelectionController;
@@ -24,6 +25,9 @@ use App\Http\Controllers\SelectionController;
 Route::get('/', [HomeController::class, 'index'])->name('name');
 Route::post('/logout', [HomeController::class, 'destroy'])->middleware(['auth:web'])->name('user.logout');
 
+// Notification Controller
+Route::get('notifications', [NotificationsController::class, 'index'])->name('notifications');
+Route::get('notifications/{id}', [NotificationsController::class, 'show'])->name('notifications.read');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

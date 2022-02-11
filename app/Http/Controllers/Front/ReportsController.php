@@ -5,8 +5,12 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\ReportCreatedNotification;
 
 use App\Models\City;
+use App\Models\Admin;
+use App\Models\subadmin;
 use App\Models\Report;
 
 class ReportsController extends Controller
@@ -55,6 +59,10 @@ class ReportsController extends Controller
             'city_id' => $request->post('city'),
             'user_id' => Auth::user()->id,
         ]);
+
+        $subadmin = Subadmin::where('id', 1)->first();
+
+        Notification::send($subadmin, new ReportCreatedNotification($report));
 
         return redirect()->route('report.index');
     }
