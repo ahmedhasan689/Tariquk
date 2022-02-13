@@ -66,4 +66,10 @@ class User extends Authenticatable
         return $this->hasMany(Path::class, 'user_id');
     }
 
+    // 
+    public function routeNotificationForNexmo($notification = null)
+     {
+        return  $this->phone_number;
+     }
+
 }

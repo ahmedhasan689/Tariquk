@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Notification;
 use App\Notifications\ReportCreatedNotification;
 
 use App\Models\Report;
+use App\Models\Subadmin;
 use App\Models\Path;
 
 class CitiesController extends Controller
@@ -70,18 +71,16 @@ class CitiesController extends Controller
         $paths = Path::where('path', 'LIKE', '%' . $report->street . '%')->get();
 
         foreach($paths as $path){
-
             $users = $path->user;
+            // Send Notifications To Phone Number
+            if($users) {
+                Notification::send($users, new ReportCreatedNotification($report));
+            }
         }
 
         $report->update([
             'show_status' => 1,
         ]);
-
-        // dd($users);
-
-        // Send Notifications To Phone Number
-        Notification::send($users, new ReportCreatedNotification($report));
 
         return redirect()->back();
     }

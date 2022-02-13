@@ -1,0 +1,19 @@
+Login As Admin 
+username : Admin-One@gmail.com
+pass: 12345678
+-----------------
+Login As Subadmin
+Rafah-Suabadmin@gmail.com
+pass:12345678
+-------------
+Login As User 
+Yazan@gmail.com
+pass: 12345678
+------------------------------------------------
+Team Gmails
+ Saeda : saedaraed19@gmail.com
+ Razan : rzanayman99@gmail.com
+ Aseel : aseelijuma@gmail.com
+ Ahmed : hlhatab@gmail.com
+---------------------------------------------------
+For SMS Notification Connect With Nexmo Package

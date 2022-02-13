@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class NotificationMenu extends Component
 {
-
+    /**
+     * @var \App\Notifications\ReportCreatedNotification
+     */
     public $notifications;
 
     public $unread;

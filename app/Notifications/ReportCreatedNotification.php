@@ -64,7 +64,7 @@ class ReportCreatedNotification extends Notification
     public function toNexmo($notifiable)
     {
         $message = new NexmoMessage();
-        $message->content( ' إبلاغ جديد: هناك إغلاق في', ['street' => $this->report->street] );
+        $message->content( 'We Are Sorry For This, But'. ['Street' => $this->report->street] . 'Is Closed' );
         
         return $message;
     }

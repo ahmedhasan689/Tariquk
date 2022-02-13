@@ -18,7 +18,7 @@ class ReportsController extends Controller
 
     public function index() 
     {
-        $reports = Report::where('show_status', '1')->get();    
+        $reports = Report::where('show_status', '1')->orderBy('created_at', 'desc')->get();    
         return view('Front.Reports.index', compact('reports'));
     }
 
@@ -60,7 +60,7 @@ class ReportsController extends Controller
             'user_id' => Auth::user()->id,
         ]);
 
-        $subadmin = Subadmin::where('id', 1)->first();
+        $subadmin = Subadmin::where('city_id', $request->city)->get();
 
         Notification::send($subadmin, new ReportCreatedNotification($report));
 
