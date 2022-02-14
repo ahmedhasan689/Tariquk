@@ -59,7 +59,7 @@ Route::group([
     'as' => 'report.'
 ], function() { 
     Route::get('/', [ReportsController::class, 'index'])->name('index');
-    Route::get('/create', [ReportsController::class, 'create'])->name('create');
+    Route::get('/create', [ReportsController::class, 'create'])->middleware(['auth'])->name('create');
     Route::post('/', [ReportsController::class, 'store'])->name('store');
 });
 // End Report Route [ ProfileController ]

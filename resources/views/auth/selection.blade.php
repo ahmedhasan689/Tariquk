@@ -6,9 +6,9 @@
 <div class="wrapper">
     <section class="height-100vh d-flex align-items-center page-section-ptb login">
         <div class="container"  style="margin-top: 20px;">
-            <div class="row justify-content-center no-gutters vertical-align" style="box-shadow: 2px 3px 4px; padding:10px 15px">
+            <div class="row justify-content-center no-gutters vertical-align" style="padding:10px 15px; margin-top: 150px; background-color: #d92020;">
 
-                <div style="border-radius: 15px;" class="col-lg-8 col-md-8 bg-white">
+                <div style="border-radius: 15px; background-color: transparent !important" class="col-lg-8 col-md-8 bg-white bg-none">
                     <div class="login-fancy pb-40 clearfix">
                         <h3 style="font-family: 'Cairo', sans-serif" class="mb-30">حدد طريقة الدخول</h3>
                         
